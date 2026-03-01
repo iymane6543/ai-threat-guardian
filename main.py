@@ -80,6 +80,6 @@ pickle.dump(scaler, open('models/scaler.pkl', 'wb'))
 pickle.dump(features, open('models/features.pkl', 'wb'))
 print(" Modèle sauvegardé dans le dossier models/ !")
 
-print("\n SEMAINE 3 TERMINÉE ! Ton modèle ML est prêt !")
+
 
 

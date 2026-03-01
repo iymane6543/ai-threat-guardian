@@ -1,13 +1,23 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import pickle
-import numpy as np
 
-# Charger le modèle
 model = pickle.load(open('models/model.pkl', 'rb'))
 scaler = pickle.load(open('models/scaler.pkl', 'rb'))
 
 app = FastAPI(title="AI Threat Guardian")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
 class NetworkLog(BaseModel):
     duration: float
@@ -26,7 +36,7 @@ class NetworkLog(BaseModel):
 
 @app.get("/")
 def home():
-    return {"message": "AI Threat Guardian is running"}
+    return FileResponse("frontend/index.html")
 
 @app.post("/analyze")
 def analyze(log: NetworkLog):
