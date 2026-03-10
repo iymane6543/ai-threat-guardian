@@ -62,5 +62,5 @@ uvicorn api:app --reload
 ## Author
 
 **Iymane Bolakhrif** - Computer Science Student, 3rd Year
-Project combining Software Engineering and Cybersecurity
+Project combining Software Engineering 
 
